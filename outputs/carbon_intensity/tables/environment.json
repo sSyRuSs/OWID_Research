@@ -1,0 +1,29 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "numpy": "2.5.3",
+  "pandas": "2.3.3",
+  "scikit_learn": "1.9.1",
+  "xgboost": "3.4.1",
+  "shap": "0.52.0",
+  "seed": 42,
+  "features": [
+    "coal_share_elec",
+    "gas_share_elec",
+    "oil_share_elec",
+    "hydro_share_elec",
+    "nuclear_share_elec",
+    "wind_share_elec",
+    "solar_share_elec",
+    "biofuel_share_elec",
+    "other_renewables_share_elec",
+    "net_elec_imports_share_demand",
+    "log_per_capita_electricity",
+    "year"
+  ],
+  "split": {
+    "train": "2000-2018",
+    "validation": "2019-2021",
+    "test": "2022-2025"
+  }
+}

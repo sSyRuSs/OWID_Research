@@ -1,0 +1,13 @@
+feature,mean_abs_shap
+hydro_share_elec,123.46725
+coal_share_elec,51.048035
+oil_share_elec,27.051262
+gas_share_elec,25.85129
+nuclear_share_elec,24.854958
+solar_share_elec,24.21185
+other_renewables_share_elec,23.101704
+wind_share_elec,22.433601
+log_per_capita_electricity,11.564614
+biofuel_share_elec,7.3369837
+net_elec_imports_share_demand,6.4729037
+year,3.4255688

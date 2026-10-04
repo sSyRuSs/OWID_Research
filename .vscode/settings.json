@@ -1,0 +1,25 @@
+{
+    "latex-workshop.latex.tools": [
+        {
+            "name": "xelatex-miktex",
+            "command": "C:/Users/Admin/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ],
+            "env": {}
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "XeLaTeX MiKTeX (2 passes)",
+            "tools": [
+                "xelatex-miktex",
+                "xelatex-miktex"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipe.default": "first"
+}

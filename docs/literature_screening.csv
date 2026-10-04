@@ -1,0 +1,11 @@
+id,reference,year,source_type,relevance,url,used_in_paper
+OWID2026,"Our World in Data, Carbon intensity of electricity",2026,dataset,"Target definition, country-year coverage and Ember attribution",https://ourworldindata.org/grapher/carbon-intensity-electricity,yes
+OWIDENERGY,"Our World in Data, Energy Data repository",2026,dataset,"Power-mix and control variables with codebook",https://github.com/owid/energy-data,yes
+HOERL1970,"Hoerl and Kennard, Ridge Regression: Biased Estimation for Nonorthogonal Problems",1970,method,"Regularization under multicollinearity",https://doi.org/10.1080/00401706.1970.10488634,yes
+ZOU2005,"Zou and Hastie, Regularization and Variable Selection via the Elastic Net",2005,method,"Combined L1/L2 regularization",https://doi.org/10.1111/j.1467-9868.2005.00503.x,yes
+BREIMAN2001,"Breiman, Random Forests",2001,method,"Nonlinear ensemble baseline",https://doi.org/10.1023/A:1010933404324,yes
+CHEN2016,"Chen and Guestrin, XGBoost: A Scalable Tree Boosting System",2016,method,"Gradient-boosted tree model",https://doi.org/10.1145/2939672.2939785,yes
+PROKHORENKOVA2018,"Prokhorenkova et al., CatBoost: unbiased boosting with categorical features",2018,method,"Boosting comparison model",https://proceedings.neurips.cc/paper/2018/hash/14491b756b3a51daac41c24863285549-Abstract.html,yes
+LUNDBERG2017,"Lundberg and Lee, A Unified Approach to Interpreting Model Predictions",2017,method,"SHAP theoretical foundation",https://proceedings.neurips.cc/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html,yes
+ARAS2022,"Aras and Van, Explainable artificial intelligence for energy use and CO2 emissions",2022,application,"Interpretable ML in energy and emissions",https://doi.org/10.1016/j.apenergy.2022.120163,yes
+ENGAPPAI2023,"Day-ahead carbon intensity forecasting with machine learning",2023,application,"Short-horizon electricity carbon forecasting context",https://doi.org/10.1016/j.engappai.2023.106314,yes

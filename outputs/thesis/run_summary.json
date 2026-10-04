@@ -1,0 +1,11 @@
+{
+  "panel_rows": 5267,
+  "countries": 210,
+  "years": [
+    2000,
+    2025
+  ],
+  "best_model_selected_by_temporal_validation_rmse": "catboost",
+  "metrics_path": "D:\\OneDrive - University Of Industry and Trade\\kmeans-owid-country-development\\kmeans-owid-country-development\\outputs\\thesis\\tables\\model_metrics.csv",
+  "figures": 12
+}

@@ -1,0 +1,25 @@
+model,feature,importance
+Random Forest,coal_share_elec,0.0831249170992658
+Random Forest,gas_share_elec,0.031523413477747196
+Random Forest,oil_share_elec,0.061632836296761556
+Random Forest,hydro_share_elec,0.5982682765333107
+Random Forest,nuclear_share_elec,0.0734227196929068
+Random Forest,wind_share_elec,0.015341452173352903
+Random Forest,solar_share_elec,0.004578580910910861
+Random Forest,biofuel_share_elec,0.010497887243710691
+Random Forest,other_renewables_share_elec,0.0491104647354429
+Random Forest,net_elec_imports_share_demand,0.026544142114863622
+Random Forest,log_per_capita_electricity,0.03911593195682745
+Random Forest,year,0.006839377764899581
+XGBoost,coal_share_elec,0.09610042721033096
+XGBoost,gas_share_elec,0.04193785786628723
+XGBoost,oil_share_elec,0.034981951117515564
+XGBoost,hydro_share_elec,0.43282774090766907
+XGBoost,nuclear_share_elec,0.1877519190311432
+XGBoost,wind_share_elec,0.0282643623650074
+XGBoost,solar_share_elec,0.00825823936611414
+XGBoost,biofuel_share_elec,0.03046848438680172
+XGBoost,other_renewables_share_elec,0.09261889010667801
+XGBoost,net_elec_imports_share_demand,0.030995912849903107
+XGBoost,log_per_capita_electricity,0.012704789638519287
+XGBoost,year,0.003089462174102664

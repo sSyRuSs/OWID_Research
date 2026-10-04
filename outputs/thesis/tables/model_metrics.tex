@@ -1,0 +1,28 @@
+\begin{longtable}{llrrrr}
+\toprule
+protocol & model\_label & n & mae & rmse & r2 \\
+\midrule
+\endfirsthead
+\toprule
+protocol & model\_label & n & mae & rmse & r2 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{Continued on next page} \\
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+temporal & Linear Regression & 697 & 49.750000 & 82.780000 & 0.887000 \\
+temporal & Ridge & 697 & 49.750000 & 82.780000 & 0.887000 \\
+temporal & Elastic Net & 697 & 49.730000 & 82.780000 & 0.887000 \\
+temporal & Random Forest & 697 & 30.700000 & 49.050000 & 0.960000 \\
+temporal & XGBoost & 697 & 27.720000 & 47.690000 & 0.962000 \\
+temporal & CatBoost & 697 & 24.680000 & 41.040000 & 0.972000 \\
+unseen\_country & Linear Regression & 1047 & 61.060000 & 100.590000 & 0.792000 \\
+unseen\_country & Ridge & 1047 & 60.820000 & 100.530000 & 0.792000 \\
+unseen\_country & Elastic Net & 1047 & 60.270000 & 100.380000 & 0.793000 \\
+unseen\_country & Random Forest & 1047 & 65.320000 & 115.550000 & 0.726000 \\
+unseen\_country & XGBoost & 1047 & 59.490000 & 107.070000 & 0.764000 \\
+unseen\_country & CatBoost & 1047 & 60.700000 & 110.610000 & 0.749000 \\
+\end{longtable}

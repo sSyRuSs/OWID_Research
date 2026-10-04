@@ -1,0 +1,9 @@
+{
+  "best_test_model": "XGBoost",
+  "best_test_mae": 24.2476838174103,
+  "best_test_rmse": 41.02615306120217,
+  "best_test_r2": 0.9715676836194501,
+  "test_rows": 705,
+  "metrics_path": "D:\\OneDrive - University Of Industry and Trade\\kmeans-owid-country-development\\kmeans-owid-country-development\\outputs\\carbon_intensity\\tables\\model_metrics.csv",
+  "paper_macros_path": "D:\\OneDrive - University Of Industry and Trade\\kmeans-owid-country-development\\kmeans-owid-country-development\\paper\\generated_results.tex"
+}

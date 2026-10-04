@@ -1,0 +1,9 @@
+variable,status,reason
+carbon_intensity_elec,excluded,Alternative target definition / direct leakage risk
+greenhouse_gas_emissions,excluded,Emission total mechanically linked to target
+renewables_share_elec,panel_only,Aggregate of detailed renewable shares
+oil_share_elec,reference,Omitted compositional reference; this choice minimized maximum training VIF
+other_renewables_share_elec,panel_only,Overlaps strongly with biofuel in the OWID feature definitions
+electricity_generation,panel_only,Near-identity with demand and net imports
+per_capita_electricity,panel_only,Derived from generation and population
+gdp,panel_only,33% missing and unavailable for much of held-out period

@@ -1,0 +1,49 @@
+{
+  "generated_at_utc": "2026-10-04T04:14:02.935970+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "pandas": "2.3.3",
+    "numpy": "2.5.3",
+    "scikit_learn": "1.9.1",
+    "xgboost": "3.4.1",
+    "shap": "0.52.0"
+  },
+  "random_seed": 42,
+  "source_urls": {
+    "electricity_by_source": "https://ourworldindata.org/grapher/electricity-mix.csv?v=1&csvType=full&useColumnShortNames=false&source=total&metric=by_source&frequency=annual",
+    "electricity_generation": "https://ourworldindata.org/grapher/electricity-mix.csv?v=1&csvType=full&useColumnShortNames=false&source=total&metric=generation&frequency=annual",
+    "electricity_demand": "https://ourworldindata.org/grapher/electricity-mix.csv?v=1&csvType=full&useColumnShortNames=false&source=total&metric=demand&frequency=annual",
+    "net_imports": "https://ourworldindata.org/grapher/electricity-mix.csv?v=1&csvType=full&useColumnShortNames=false&source=total&metric=net_imports&frequency=annual",
+    "electricity_per_capita": "https://ourworldindata.org/grapher/electricity-mix.csv?v=1&csvType=full&useColumnShortNames=false&source=total&metric=per_capita&frequency=annual",
+    "population": "https://ourworldindata.org/grapher/population.csv?v=1&csvType=full&useColumnShortNames=false",
+    "gdp_per_capita": "https://ourworldindata.org/grapher/gdp-per-capita-worldbank.csv?v=1&csvType=full&useColumnShortNames=false",
+    "target": "https://ourworldindata.org/grapher/electricity-mix.csv?v=1&csvType=full&useColumnShortNames=false&source=total&metric=carbon_intensity&frequency=annual",
+    "target_metadata": "https://ourworldindata.org/grapher/electricity-mix.metadata.json?v=1&csvType=full&useColumnShortNames=false&source=total&metric=carbon_intensity&frequency=annual"
+  },
+  "sha256": {
+    "data\\raw\\owid-grapher-electricity-inputs.csv": "c6b53227aface90509366633068d308be26bc8a2c855a6f8323f5b598200a314",
+    "data\\raw\\owid-grapher-electricity-by-source.csv": "3c1b33823486dfcb8f661ec3f64bb64a741ff460620f0efbb55545ed34fea97f",
+    "data\\raw\\owid-grapher-electricity-generation.csv": "d159338a331a2485541ec26820b808da8a9cab4949f5b4fa14b53d9fe329e6de",
+    "data\\raw\\owid-grapher-electricity-demand.csv": "fc72e7103472d9746cf92ee9025d355c510ef43bb6a56d953f4946062decb840",
+    "data\\raw\\owid-grapher-net-imports.csv": "d137cb53861644b02d7d4bb29aaa8d8c3676896e4f97b80bcdcb4eae70e9cef4",
+    "data\\raw\\owid-grapher-electricity-per-capita.csv": "a77084ab6dbb1a42a6b0a3fb26240c8c03fdf2ce6047663c116a2aa1a61c2a97",
+    "data\\raw\\owid-grapher-population.csv": "6e72d4ffe8f0e940df60c90b13c8ad6eda85043b995b244e8b3e20b1e833b541",
+    "data\\raw\\owid-grapher-gdp-per-capita.csv": "18018aea4360d625b274c8a773ebd7a54b7e22e1d79e19587d5af4f0eedac111",
+    "data\\raw\\owid-grapher-carbon-intensity.csv": "96f8a3dfd845f0cfea6bdd16274fe7a97b790c20237ad788bbdfda5ab08aece9",
+    "data\\raw\\owid-grapher-carbon-intensity.metadata.json": "650cbea8ef750ea6114da58ae6f2c9b110f548bf521ba1c198dfdfd039f85c1c"
+  },
+  "model_features": [
+    "coal_share_elec",
+    "gas_share_elec",
+    "solar_share_elec",
+    "wind_share_elec",
+    "hydro_share_elec",
+    "nuclear_share_elec",
+    "biofuel_share_elec",
+    "log_electricity_demand",
+    "net_elec_imports_share_demand",
+    "log_population",
+    "year_centered"
+  ]
+}

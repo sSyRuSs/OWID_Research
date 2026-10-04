@@ -1,0 +1,12 @@
+feature,importance
+hydro_share_elec,45.88071882675941
+coal_share_elec,12.204396017818205
+nuclear_share_elec,11.446690650895821
+gas_share_elec,6.596172837686497
+biofuel_share_elec,5.514324936029604
+log_electricity_demand,5.45011141960541
+net_elec_imports_share_demand,4.440885419390409
+wind_share_elec,4.303933439158764
+log_population,2.6948539504167193
+solar_share_elec,1.096892118269154
+year_centered,0.3710203839700053

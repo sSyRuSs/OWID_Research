@@ -1,0 +1,520 @@
+\documentclass[11pt,a4paper]{article}
+
+% =========================================================
+% COMPILER: XeLaTeX
+% =========================================================
+\usepackage{fontspec}
+\setmainfont{Times New Roman} % Windows Unicode serif font with Vietnamese support
+
+\usepackage[a4paper,top=2.2cm,bottom=2.2cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.15}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{siunitx}
+\usepackage{indentfirst}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=blue,
+    pdftitle={Phân cụm các quốc gia theo mức độ phát triển kinh tế -- xã hội bằng thuật toán K-Means sử dụng dữ liệu Our World in Data},
+    pdfauthor={[Nguyễn Thành Long, Nguyễn Đức Huy, Hồ Quốc Sử, Bùi Lê Thanh Ngân]}
+}
+
+\captionsetup{font=small,labelfont=bf}
+\setlength{\parindent}{1.2cm}
+\setlength{\parskip}{0.25em}
+\setlist[itemize]{topsep=0.3em,itemsep=0.2em}
+\setlist[enumerate]{topsep=0.3em,itemsep=0.2em}
+
+% Chèn ảnh an toàn: nếu file chưa tồn tại thì hiển thị placeholder thay vì lỗi compile.
+\newcommand{\SafeFigure}[4][0.82\linewidth]{%
+    \begin{figure}[H]
+        \centering
+        \IfFileExists{#2}{%
+            \includegraphics[width=#1]{#2}%
+        }{%
+            \fbox{\parbox[c][5.2cm][c]{0.80\linewidth}{\centering
+            \textit{Chưa có tệp \texttt{\detokenize{#2}}.\\#3}}}%
+        }
+        \caption{#4}
+    \end{figure}
+}
+
+\title{\textbf{PHÂN CỤM CÁC QUỐC GIA THEO MỨC ĐỘ PHÁT TRIỂN KINH TẾ -- XÃ HỘI BẰNG THUẬT TOÁN K-MEANS SỬ DỤNG DỮ LIỆU OUR WORLD IN DATA}}
+
+\author{
+    {[Nguyễn Thành Long, Nguyễn Đức Huy, Hồ Quốc Sử, Bùi Lê Thanh Ngân]}\\
+    {[Khoa Công Nghệ Thông Tin -- Trường Đại Học Công Thương Thành Phố Hồ Chí Minh]}\\
+    \texttt{[1001260011@huit.edu.vn]}
+}
+
+\date{Tháng 9 năm 2026}
+
+\begin{document}
+\maketitle
+
+% =========================================================
+% TÓM TẮT
+% =========================================================
+\begin{abstract}
+Mức độ phát triển của một quốc gia là một khái niệm đa chiều, không thể được phản ánh đầy đủ chỉ bằng một chỉ số kinh tế đơn lẻ như GDP bình quân đầu người. Nghiên cứu này xây dựng một quy trình học máy không giám sát nhằm phân cụm các quốc gia theo mức độ phát triển kinh tế -- xã hội bằng thuật toán K-Means, sử dụng dữ liệu từ Our World in Data (OWID). Năm đặc trưng được lựa chọn gồm GDP bình quân đầu người theo sức mua tương đương, tuổi thọ trung bình, số năm đi học trung bình, tỷ lệ dân số sử dụng Internet và tỷ lệ dân số được tiếp cận điện. Dữ liệu năm 2023 được làm sạch, lọc theo mã quốc gia ISO-3 và chuẩn hóa bằng StandardScaler trước khi phân cụm. Trên 176 quốc gia, giá trị $K=2$ đạt Silhouette Score cao nhất trong khoảng khảo sát $K=2$ đến $K=6$, với điểm số 0,5381. Hai cụm thu được gồm 130 và 46 quốc gia, thể hiện sự khác biệt rõ về trung bình của cả năm chỉ số; HDI trung bình tương ứng là 0,823 và 0,546 dù HDI không được dùng làm đầu vào. Hai thành phần chính đầu tiên của PCA giải thích tổng cộng 89,37\% phương sai. Việt Nam thuộc Cluster 0, có mức tiếp cận điện cao hơn nhẹ nhưng thấp hơn trung bình cụm ở các chỉ số còn lại. Kết quả cho thấy quy trình có thể nhận diện hai hồ sơ phát triển tương đối khác biệt, nhưng các cụm chỉ nên được diễn giải trong phạm vi biến và phương pháp đã lựa chọn.
+
+\vspace{0.5em}
+\noindent\textbf{Từ khóa:} K-Means, phân cụm, học máy không giám sát, phát triển kinh tế -- xã hội, Our World in Data, PCA, HDI.
+\end{abstract}
+
+\begin{center}
+\textbf{Country Clustering by Socioeconomic Development Using K-Means and Our World in Data}
+\end{center}
+
+\noindent\textbf{Abstract.}
+This study proposes an unsupervised machine-learning workflow for clustering countries by socioeconomic development using K-Means and data from Our World in Data. Five indicators are used as clustering features: purchasing-power-parity-adjusted GDP per capita, life expectancy, mean years of schooling, Internet usage, and access to electricity. After cleaning and standardization, the 2023 dataset contains 176 countries. Among $K=2$ to $K=6$, $K=2$ produces the highest Silhouette Score (0.5381), yielding clusters of 130 and 46 countries. Their mean HDI values are 0.823 and 0.546, respectively, although HDI is reserved as an external reference rather than an input feature. The first two PCA components explain 89.37\% of total variance. Vietnam belongs to Cluster 0 and exceeds its cluster mean only in electricity access among the five clustering features. The results provide a reproducible exploratory view of multidimensional development patterns, without treating the clusters as official development classifications.
+
+\vspace{0.5em}
+\noindent\textbf{Keywords:} K-Means, clustering, unsupervised learning, socioeconomic development, Our World in Data, PCA, HDI.
+
+% =========================================================
+\section{Giới thiệu}
+% =========================================================
+
+Đánh giá mức độ phát triển của các quốc gia là một bài toán quan trọng trong kinh tế học, khoa học dữ liệu và hoạch định chính sách. GDP bình quân đầu người thường được sử dụng để mô tả năng lực kinh tế, nhưng một quốc gia có thu nhập cao chưa chắc đồng thời đạt mức cao về sức khỏe, giáo dục, cơ sở hạ tầng và khả năng tiếp cận công nghệ. Vì vậy, việc đánh giá phát triển theo hướng đa chiều có thể cung cấp góc nhìn đầy đủ hơn so với cách tiếp cận chỉ dựa trên GDP.
+
+Human Development Index (HDI) là một ví dụ điển hình của cách tiếp cận đa chiều khi tổng hợp các thành phần về sức khỏe, giáo dục và mức sống thành một chỉ số duy nhất \cite{owid_hdi}. Tuy nhiên, HDI không trực tiếp thể hiện một số khía cạnh hạ tầng hiện đại như mức phổ cập Internet hay khả năng tiếp cận điện. Trong nghiên cứu này, các quốc gia được biểu diễn bởi một vector gồm năm chỉ số kinh tế -- xã hội, sau đó thuật toán K-Means được sử dụng để tự động phát hiện các nhóm quốc gia có đặc điểm tương đồng.
+
+K-Means là một trong những thuật toán phân cụm phổ biến nhất nhờ cơ chế đơn giản, khả năng mở rộng tốt và dễ diễn giải \cite{macqueen1967,lloyd1982}. Khác với bài toán học có giám sát, nghiên cứu không sử dụng nhãn ``phát triển cao'', ``trung bình'' hay ``thấp'' trong quá trình huấn luyện. Các nhãn mô tả chỉ được gán sau khi phân tích centroid của từng cụm. Điều này giúp hạn chế việc áp đặt phân loại chủ quan trước khi quan sát cấu trúc dữ liệu.
+
+Nghiên cứu tập trung trả lời các câu hỏi sau:
+
+\begin{enumerate}
+    \item Các quốc gia có hình thành những cụm có đặc trưng phát triển kinh tế -- xã hội khác nhau khi chỉ sử dụng dữ liệu định lượng hay không?
+    \item Giá trị $K$ nào phù hợp nhất với dữ liệu theo các chỉ số WCSS và Silhouette Score?
+    \item Những biến nào khác biệt rõ nhất giữa các cụm thu được?
+    \item HDI của các quốc gia có thể hiện xu hướng phân tầng tương ứng với các cụm hay không?
+    \item Việt Nam nằm trong cụm nào và có vị trí tương đối ra sao so với trung bình của cụm đó?
+\end{enumerate}
+
+Đóng góp chính của đồ án gồm: (i) xây dựng một tập dữ liệu tổng hợp từ nhiều chỉ số OWID; (ii) áp dụng một quy trình phân cụm có chuẩn hóa và lựa chọn số cụm bằng tiêu chí định lượng; (iii) trực quan hóa kết quả bằng PCA; và (iv) sử dụng HDI như một tham chiếu bên ngoài để hỗ trợ diễn giải kết quả.
+
+% =========================================================
+\section{Cơ sở lý thuyết và nghiên cứu liên quan}
+% =========================================================
+
+\subsection{Đo lường phát triển kinh tế -- xã hội}
+
+Phát triển kinh tế -- xã hội là một khái niệm đa chiều. Trong phạm vi đồ án, năm nhóm đặc trưng được lựa chọn nhằm đại diện cho các khía cạnh tương đối khác nhau:
+
+\begin{itemize}
+    \item \textbf{GDP bình quân đầu người}: đại diện cho quy mô hoạt động kinh tế trên đầu người và mức sống vật chất tương đối;
+    \item \textbf{Tuổi thọ trung bình}: phản ánh tổng hợp điều kiện sức khỏe và chất lượng sống;
+    \item \textbf{Số năm đi học trung bình}: đại diện cho mức tích lũy giáo dục;
+    \item \textbf{Tỷ lệ dân số sử dụng Internet}: phản ánh mức độ tiếp cận hạ tầng số;
+    \item \textbf{Tỷ lệ dân số được tiếp cận điện}: phản ánh mức độ phổ cập một hạ tầng thiết yếu.
+\end{itemize}
+
+GDP bình quân đầu người được sử dụng ở dạng điều chỉnh theo sức mua tương đương (PPP). Cách biểu diễn này phù hợp hơn khi so sánh mức sống giữa các quốc gia vì đã xem xét khác biệt về mức giá tương đối \cite{owid_gdp}.
+
+\subsection{Thuật toán K-Means}
+
+Giả sử tập dữ liệu gồm $n$ quốc gia, mỗi quốc gia được biểu diễn bởi một vector $x_i \in \mathbb{R}^{d}$. K-Means phân chia tập dữ liệu thành $K$ cụm $C_1, C_2, \ldots, C_K$ bằng cách tối thiểu hóa tổng bình phương khoảng cách Euclidean từ mỗi điểm đến centroid của cụm tương ứng:
+
+\begin{equation}
+J = \sum_{k=1}^{K} \sum_{x_i \in C_k} \left\|x_i - \mu_k\right\|_2^2,
+\label{eq:kmeans}
+\end{equation}
+
+trong đó $\mu_k$ là centroid của cụm $C_k$.
+
+Quy trình K-Means gồm ba bước chính lặp lại cho đến khi hội tụ: (1) khởi tạo centroid, (2) gán mỗi quan sát vào centroid gần nhất, và (3) cập nhật centroid bằng trung bình của các điểm trong cụm \cite{macqueen1967,lloyd1982}.
+
+\subsection{Elbow Method và WCSS}
+
+WCSS đo tổng bình phương khoảng cách của các điểm đến centroid trong cụm. Khi $K$ tăng, WCSS luôn giảm; tuy nhiên, sau một ngưỡng nhất định, mức giảm có thể trở nên không đáng kể. Elbow Method lựa chọn $K$ tại vùng ``khuỷu'' của đường WCSS, nơi việc tăng thêm số cụm không còn cải thiện đáng kể độ chặt trong cụm.
+
+\subsection{Silhouette Score}
+
+Silhouette Score được sử dụng để đánh giá mức độ phù hợp của một quan sát với cụm hiện tại so với cụm lân cận. Với quan sát $i$, gọi $a(i)$ là khoảng cách trung bình từ $i$ đến các điểm trong cùng cụm và $b(i)$ là khoảng cách trung bình nhỏ nhất từ $i$ đến một cụm khác. Silhouette của điểm $i$ được tính bởi \cite{rousseeuw1987}:
+
+\begin{equation}
+s(i) = \frac{b(i)-a(i)}{\max\{a(i),b(i)\}},
+\label{eq:silhouette}
+\end{equation}
+
+với $-1 \leq s(i) \leq 1$. Giá trị càng gần 1 thường cho thấy quan sát được gán vào cụm phù hợp hơn.
+
+\subsection{Principal Component Analysis}
+
+PCA là phương pháp giảm chiều tuyến tính nhằm tìm các trục mới sao cho phương sai dữ liệu được bảo toàn nhiều nhất có thể \cite{pearson1901}. Trong nghiên cứu này, PCA chỉ được sử dụng để trực quan hóa dữ liệu năm chiều trên mặt phẳng hai chiều. K-Means vẫn được huấn luyện trên toàn bộ năm đặc trưng đã chuẩn hóa nhằm tránh làm mất thông tin trước quá trình phân cụm.
+
+% =========================================================
+\section{Dữ liệu nghiên cứu}
+% =========================================================
+
+\subsection{Nguồn dữ liệu}
+
+Toàn bộ dữ liệu được lấy từ Our World in Data (OWID). Các tập dữ liệu OWID được lựa chọn vì có cấu trúc thống nhất theo các cột \texttt{Entity}, \texttt{Code}, \texttt{Year} và giá trị chỉ số, thuận lợi cho việc kết hợp theo quốc gia và năm. Bảng~\ref{tab:variables} trình bày các biến được sử dụng.
+
+\begin{table}[H]
+\centering
+\caption{Các biến sử dụng trong nghiên cứu}
+\label{tab:variables}
+\small
+\begin{tabular}{p{3.2cm}p{5.0cm}p{2.8cm}p{2.0cm}}
+\toprule
+\textbf{Biến} & \textbf{Ý nghĩa} & \textbf{Đơn vị} & \textbf{Vai trò} \\
+\midrule
+GDP per capita & GDP bình quân đầu người, điều chỉnh PPP & International-\$ & Feature \\
+Life expectancy & Tuổi thọ trung bình khi sinh & Năm & Feature \\
+Mean years of schooling & Số năm đi học trung bình & Năm & Feature \\
+Internet usage & Tỷ lệ dân số sử dụng Internet & \% & Feature \\
+Electricity access & Tỷ lệ dân số được tiếp cận điện & \% & Feature \\
+Human Development Index & Chỉ số phát triển con người & $[0,1]$ & Đối chiếu \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Các nguồn OWID được sử dụng gồm GDP bình quân đầu người \cite{owid_gdp}, tuổi thọ \cite{owid_life}, số năm đi học trung bình \cite{owid_schooling}, tỷ lệ sử dụng Internet \cite{owid_internet}, tỷ lệ tiếp cận điện \cite{owid_electricity} và HDI \cite{owid_hdi}.
+
+\subsection{Lựa chọn năm 2023}
+
+Nghiên cứu sử dụng một lát cắt ngang tại năm 2023. Lý do chính là đây là năm chung phù hợp giữa các biến giáo dục, HDI và các chỉ số hạ tầng được lựa chọn. Mỗi quốc gia xuất hiện tối đa một lần trong tập dữ liệu cuối cùng:
+
+\begin{equation}
+\mathbf{x}_i = [GDP_i, Life_i, School_i, Internet_i, Electricity_i].
+\end{equation}
+
+Cách tổ chức này giúp bài toán tập trung vào việc so sánh cấu trúc phát triển giữa các quốc gia tại cùng một thời điểm, thay vì trộn lẫn biến thiên theo thời gian với khác biệt giữa quốc gia.
+
+\subsection{Lọc quốc gia và kết hợp dữ liệu}
+
+Các bảng dữ liệu được kết hợp bằng ba khóa \texttt{Entity}, \texttt{Code} và \texttt{Year}. Các bản ghi tổng hợp như \textit{World}, các khu vực địa lý hoặc nhóm thu nhập được loại bỏ. Một tiêu chí thực dụng được sử dụng là chỉ giữ các quan sát có mã quốc gia ISO-3 hợp lệ ở cột \texttt{Code}.
+
+Sau bước merge, các quốc gia thiếu ít nhất một trong năm đặc trưng đầu vào được loại khỏi tập phân cụm theo phương pháp complete-case analysis. Đây là lựa chọn đơn giản, minh bạch và phù hợp với phạm vi đồ án; ảnh hưởng của lựa chọn này được thảo luận ở phần hạn chế.
+
+\subsection{Vai trò của HDI}
+
+HDI không được đưa vào vector đầu vào của K-Means. Sau khi phân cụm hoàn tất, HDI năm 2023 mới được ghép vào bảng kết quả để hỗ trợ đánh giá bên ngoài. Thiết kế này giúp tránh hiện tượng ``đưa đáp án vào đầu vào'', đồng thời cho phép kiểm tra xem các cụm hình thành từ năm chỉ số độc lập có xu hướng tương đồng với phân tầng HDI hay không.
+
+% =========================================================
+\section{Phương pháp nghiên cứu}
+% =========================================================
+
+\subsection{Tiền xử lý và chuẩn hóa}
+
+Năm đặc trưng có thang đo khác nhau đáng kể. GDP bình quân đầu người có thể lớn hơn nhiều về độ lớn số học so với tuổi thọ hoặc số năm đi học. Nếu sử dụng trực tiếp khoảng cách Euclidean, các biến có độ lớn lớn có thể chi phối quá trình phân cụm. Vì vậy, StandardScaler được áp dụng cho từng biến:
+
+\begin{equation}
+z_{ij} = \frac{x_{ij}-\mu_j}{\sigma_j},
+\label{eq:zscore}
+\end{equation}
+
+trong đó $\mu_j$ và $\sigma_j$ lần lượt là trung bình và độ lệch chuẩn của biến $j$.
+
+\subsection{Lựa chọn số cụm}
+
+Nghiên cứu khảo sát các giá trị:
+
+\begin{equation}
+K \in \{2,3,4,5,6\}.
+\end{equation}
+
+Với mỗi $K$, K-Means được chạy trên dữ liệu đã chuẩn hóa. Hai chỉ số được lưu lại:
+
+\begin{itemize}
+    \item \textbf{WCSS}: dùng để xây dựng Elbow plot;
+    \item \textbf{Silhouette Score}: dùng để đánh giá độ tách biệt và độ chặt của các cụm.
+\end{itemize}
+
+Theo cài đặt trong notebook, giá trị $K$ cuối cùng được chọn bằng cách lấy Silhouette Score cao nhất trong khoảng khảo sát. Đường WCSS và hồ sơ centroid được sử dụng như thông tin bổ sung để đánh giá và diễn giải nghiệm đã chọn.
+
+\subsection{Huấn luyện K-Means}
+
+Mô hình cuối cùng sử dụng khởi tạo K-Means++ và nhiều lần khởi tạo độc lập nhằm giảm phụ thuộc vào trạng thái ban đầu. Thiết lập đề xuất trong scikit-learn là:
+
+\begin{verbatim}
+KMeans(
+    n_clusters=K,
+    init="k-means++",
+    n_init=50,
+    random_state=42
+)
+\end{verbatim}
+
+Vì đây là bài toán học không giám sát, nghiên cứu không áp dụng train/test split theo cách thông thường của bài toán dự đoán có nhãn. Chất lượng cụm được đánh giá bằng chỉ số nội tại (WCSS, Silhouette Score), khả năng diễn giải centroid, trực quan PCA và đối chiếu bên ngoài với HDI.
+
+\subsection{Trực quan hóa PCA}
+
+Sau khi K-Means được huấn luyện trên dữ liệu năm chiều, PCA được áp dụng lên dữ liệu chuẩn hóa để tạo hai thành phần chính $PC_1$ và $PC_2$. Nhãn cluster từ K-Means được dùng để tô màu các điểm trên biểu đồ PCA.
+
+\subsection{Phân tích Việt Nam}
+
+Việt Nam được tách riêng khỏi kết quả cuối cùng để so sánh với centroid hoặc giá trị trung bình của cụm mà Việt Nam thuộc về. Mục tiêu là minh họa cách kết quả clustering có thể được sử dụng để diễn giải vị trí tương đối của một quốc gia cụ thể.
+
+% =========================================================
+\section{Thiết kế thực nghiệm}
+% =========================================================
+
+Quy trình thực nghiệm gồm các bước sau:
+
+\begin{enumerate}
+    \item Tải sáu tập dữ liệu CSV từ OWID;
+    \item Lọc dữ liệu tại năm 2023;
+    \item Loại các dòng không đại diện cho quốc gia;
+    \item Merge năm bảng feature theo \texttt{Entity}, \texttt{Code}, \texttt{Year};
+    \item Loại các quan sát thiếu dữ liệu đầu vào;
+    \item Chuẩn hóa năm đặc trưng bằng StandardScaler;
+    \item Chạy K-Means với $K=2,3,4,5,6$;
+    \item Tính WCSS và Silhouette Score;
+    \item Chọn $K$ phù hợp và huấn luyện mô hình cuối cùng;
+    \item Phân tích centroid trên thang đo gốc;
+    \item Trực quan hóa bằng PCA;
+    \item Ghép HDI để đối chiếu sau phân cụm;
+    \item Phân tích riêng trường hợp Việt Nam.
+\end{enumerate}
+
+Toàn bộ thí nghiệm được thực hiện trong cùng một phiên chạy notebook với dữ liệu năm 2023, tham số \texttt{random\_state=42} và \texttt{n\_init=50}. Các kết quả số dưới đây được đồng bộ trực tiếp từ đầu ra đã lưu trong notebook.
+
+% =========================================================
+\section{Kết quả thực nghiệm}
+% =========================================================
+
+\subsection{Thống kê dữ liệu sau tiền xử lý}
+
+Số quốc gia trước và sau khi xử lý dữ liệu thiếu được báo cáo trong Bảng~\ref{tab:data_stats}.
+
+\begin{table}[H]
+\centering
+\caption{Thống kê dữ liệu sau tiền xử lý}
+\label{tab:data_stats}
+\begin{tabular}{lr}
+\toprule
+\textbf{Nội dung} & \textbf{Giá trị} \\
+\midrule
+Số quốc gia trước khi loại missing & 176 \\
+Số quốc gia dùng để phân cụm & 176 \\
+Số đặc trưng đầu vào & 5 \\
+Năm phân tích & 2023 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Lựa chọn số cụm}
+
+Kết quả WCSS và Silhouette Score được trình bày trong Bảng~\ref{tab:k_results}.
+
+\begin{table}[H]
+\centering
+\caption{Kết quả đánh giá các giá trị $K$}
+\label{tab:k_results}
+\begin{tabular}{ccc}
+\toprule
+$K$ & \textbf{WCSS} & \textbf{Silhouette Score} \\
+\midrule
+2 & 369,6238 & 0,5381 \\
+3 & 218,6691 & 0,4450 \\
+4 & 179,7580 & 0,3800 \\
+5 & 149,9506 & 0,3106 \\
+6 & 128,4242 & 0,3181 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\SafeFigure{../outputs/elbow_method.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/elbow\_method.png}.}{Đường WCSS theo số lượng cụm $K$}
+
+\SafeFigure{../outputs/silhouette_scores.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/silhouette\_scores.png}.}{Silhouette Score theo số lượng cụm $K$}
+
+Theo tiêu chí Silhouette Score cao nhất được cài đặt trong notebook, nghiên cứu lựa chọn:
+
+\begin{equation}
+\boxed{K = 2}
+\end{equation}
+
+Giá trị này có Silhouette Score cao nhất, bằng 0,5381. WCSS giảm mạnh từ $K=2$ xuống $K=3$, nhưng Silhouette Score giảm từ 0,5381 xuống 0,4450 và tiếp tục thấp hơn ở các giá trị $K$ còn lại. Theo quy tắc lựa chọn được cài đặt trong notebook, mô hình cuối cùng vì vậy sử dụng $K=2$.
+
+\subsection{Đặc trưng của các cụm}
+
+Sau khi mô hình cuối cùng được huấn luyện, centroid trên không gian chuẩn hóa được biến đổi ngược về thang đo gốc để hỗ trợ diễn giải. Bảng~\ref{tab:cluster_profile} trình bày giá trị trung bình của từng biến trong các cụm.
+
+\begin{table}[H]
+\centering
+\caption{Hồ sơ kinh tế -- xã hội của các cụm}
+\label{tab:cluster_profile}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ccccccc}
+\toprule
+\textbf{Cluster} & \textbf{Số quốc gia} & \textbf{GDP/người} & \textbf{Tuổi thọ} & \textbf{Số năm học} & \textbf{Internet (\%)} & \textbf{Điện (\%)} \\
+\midrule
+0 & 130 & 34.519,08 & 76,66 & 10,74 & 84,30 & 99,21 \\
+1 & 46 & 4.190,97 & 64,10 & 5,21 & 34,47 & 54,28 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+Cluster 0 có trung bình cao hơn Cluster 1 ở cả năm đặc trưng: GDP/người cao hơn khoảng 8,2 lần; tuổi thọ cao hơn 12,56 năm; số năm đi học cao hơn 5,53 năm; tỷ lệ sử dụng Internet cao hơn 49,83 điểm phần trăm; và tỷ lệ tiếp cận điện cao hơn 44,93 điểm phần trăm. Vì vậy, trong phạm vi năm biến được chọn, Cluster 0 có thể được mô tả là nhóm có hồ sơ phát triển tương đối cao hơn, còn Cluster 1 là nhóm còn nhiều hạn chế hơn. Đây là nhãn diễn giải hậu nghiệm, không phải phân loại phát triển chính thức.
+
+\subsection{Trực quan hóa bằng PCA}
+
+Hai thành phần PCA đầu tiên giải thích lần lượt 78,11\% và 11,26\% phương sai của dữ liệu; tổng cộng là 89,37\%.
+
+\SafeFigure{../outputs/pca_clusters.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/pca\_clusters.png}.}{Trực quan hóa các cụm quốc gia trong không gian PCA hai chiều}
+
+Biểu đồ PCA được sử dụng để quan sát mức độ tách biệt tương đối giữa các cụm. Tuy nhiên, vì PCA chỉ là phép chiếu từ năm chiều xuống hai chiều, khoảng cách trên hình không phản ánh toàn bộ thông tin đã được K-Means sử dụng.
+
+\subsection{Đối chiếu với HDI}
+
+HDI chỉ được ghép vào sau khi quá trình phân cụm hoàn tất. Bảng~\ref{tab:hdi} trình bày HDI trung bình và trung vị của từng cụm.
+
+\begin{table}[H]
+\centering
+\caption{HDI theo từng cụm}
+\label{tab:hdi}
+\begin{tabular}{ccc}
+\toprule
+\textbf{Cluster} & \textbf{HDI trung bình} & \textbf{HDI trung vị} \\
+\midrule
+0 & 0,823 & 0,819 \\
+1 & 0,546 & 0,554 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\SafeFigure[0.72\linewidth]{../outputs/hdi_by_cluster.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/hdi\_by\_cluster.png}.}{HDI trung bình theo từng cụm}
+
+HDI trung bình của Cluster 0 cao hơn Cluster 1 là 0,277 điểm; trung vị cũng cao hơn 0,265 điểm. Sự phân tầng cùng chiều này hỗ trợ cách diễn giải rằng cấu trúc do K-Means tìm được có liên quan đến mức độ phát triển con người. Tuy nhiên, đây chỉ là đối chiếu mô tả, không phải bằng chứng nhân quả hoặc thước đo xác nhận tuyệt đối.
+
+\subsection{Trường hợp Việt Nam}
+
+Việt Nam được K-Means gán vào Cluster 0. Bảng~\ref{tab:vietnam} so sánh Việt Nam với trung bình của cụm tương ứng.
+
+\begin{table}[H]
+\centering
+\caption{So sánh Việt Nam với trung bình cụm tương ứng}
+\label{tab:vietnam}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Chỉ số} & \textbf{Việt Nam} & \textbf{Trung bình cụm} \\
+\midrule
+GDP/người & 13.534,80 & 34.519,08 \\
+Tuổi thọ & 74,59 & 76,66 \\
+Số năm đi học & 8,98 & 10,74 \\
+Internet (\%) & 78,08 & 84,30 \\
+Tiếp cận điện (\%) & 99,80 & 99,21 \\
+HDI & 0,766 & 0,823 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+So với trung bình Cluster 0, Việt Nam thấp hơn 20.984,28 International-\$, 2,07 năm tuổi thọ, 1,76 năm đi học, 6,22 điểm phần trăm sử dụng Internet và 0,057 điểm HDI. Ngược lại, tỷ lệ tiếp cận điện của Việt Nam cao hơn trung bình cụm 0,59 điểm phần trăm. Kết quả cho thấy việc cùng thuộc Cluster 0 không đồng nghĩa các quốc gia có mức phát triển đồng nhất; Việt Nam nằm dưới trung bình cụm trên phần lớn chiều được khảo sát.
+
+% =========================================================
+\section{Thảo luận}
+% =========================================================
+
+Cách tiếp cận phân cụm trong nghiên cứu cho phép xem xét phát triển quốc gia theo nhiều chiều đồng thời. Hai cluster thu được khác biệt đồng thời về thu nhập, sức khỏe, giáo dục và hạ tầng, vì vậy có thể xem chúng như hai ``hồ sơ phát triển'' tương đối khác nhau thay vì một bảng xếp hạng tuyến tính. Tuy nhiên, quy mô 130 so với 46 quốc gia cho thấy nghiệm $K=2$ tạo ra một phép phân tách khá rộng và không mô tả các mức trung gian chi tiết.
+
+Việc giữ HDI ra khỏi tập feature giúp hạn chế việc mô hình tái tạo trực tiếp một chỉ số đã tồn tại. HDI trung bình 0,823 ở Cluster 0 và 0,546 ở Cluster 1 cho thấy năm đặc trưng được lựa chọn chứa thông tin đáng kể liên quan đến phát triển con người, dù HDI và các đặc trưng không hoàn toàn độc lập về mặt khái niệm.
+
+Tuy nhiên, cluster không phải là nhãn chính thức về mức phát triển. Việc hai quốc gia thuộc cùng một cụm chỉ có nghĩa chúng tương đối gần nhau trong không gian năm biến được chọn sau khi chuẩn hóa. Kết quả cũng không cho phép suy luận nhân quả. Chẳng hạn, một cụm có tỷ lệ sử dụng Internet cao và tuổi thọ cao không chứng minh rằng Internet là nguyên nhân làm tăng tuổi thọ.
+
+Một điểm đáng chú ý khác là K-Means giả định khoảng cách Euclidean có ý nghĩa trên dữ liệu đã chuẩn hóa và thường phù hợp hơn với các cụm có hình dạng tương đối ``tròn'' trong không gian đặc trưng. Vì vậy, kết quả nên được xem như một cách phân nhóm hợp lý trong phạm vi phương pháp được sử dụng, không phải là cấu trúc duy nhất có thể tồn tại trong dữ liệu.
+
+% =========================================================
+\section{Hạn chế của nghiên cứu}
+% =========================================================
+
+Nghiên cứu có một số hạn chế chính. Thứ nhất, phát triển kinh tế -- xã hội còn liên quan đến nhiều yếu tố chưa được đưa vào mô hình như bất bình đẳng thu nhập, chất lượng thể chế, môi trường, mức độ an toàn, y tế, đô thị hóa và chất lượng giáo dục. Thứ hai, nghiên cứu sử dụng dữ liệu năm 2023 nên chỉ phản ánh một lát cắt tại một thời điểm, chưa mô tả quá trình chuyển đổi phát triển theo thời gian. Thứ ba, complete-case analysis có thể làm giảm số quốc gia và tạo thiên lệch nếu các quốc gia thiếu dữ liệu có đặc điểm khác biệt có hệ thống. Thứ tư, kết quả K-Means nhạy với lựa chọn biến, phương pháp chuẩn hóa và số lượng cụm. Cuối cùng, HDI được sử dụng để đối chiếu mô tả chứ chưa được xem là một ``ground truth'' tuyệt đối cho bài toán phân cụm.
+
+% =========================================================
+\section{Kết luận và hướng phát triển}
+% =========================================================
+
+Nghiên cứu đã áp dụng quy trình phân cụm K-Means cho 176 quốc gia bằng năm đặc trưng kinh tế -- xã hội từ Our World in Data năm 2023. Trong khoảng $K=2$ đến $K=6$, mô hình $K=2$ đạt Silhouette Score cao nhất là 0,5381. Cluster 0 gồm 130 quốc gia và có trung bình cao hơn trên cả năm đặc trưng; Cluster 1 gồm 46 quốc gia và có các giá trị trung bình thấp hơn rõ rệt. HDI được giữ ngoài mô hình nhưng vẫn phân tầng tương ứng giữa hai cụm, với trung bình 0,823 và 0,546. Hai thành phần PCA đầu tiên giữ lại 89,37\% phương sai, hỗ trợ trực quan hóa cấu trúc dữ liệu.
+
+Việt Nam thuộc Cluster 0 nhưng thấp hơn trung bình cụm về GDP/người, tuổi thọ, số năm đi học, tỷ lệ sử dụng Internet và HDI; riêng tỷ lệ tiếp cận điện cao hơn nhẹ. Kết quả cung cấp một góc nhìn thăm dò, không phải nhãn phát triển chính thức hay bằng chứng nhân quả. Trong hướng phát triển tiếp theo, có thể bổ sung các biến như tỷ lệ nghèo, Gini, chi tiêu y tế, tỷ lệ đô thị hóa hoặc phát thải CO$_2$; mở rộng phân tích theo chuỗi thời gian; kiểm tra độ ổn định của cụm qua bootstrap hoặc các lát cắt năm khác; và so sánh K-Means với Hierarchical Clustering, Gaussian Mixture Models hoặc DBSCAN.
+
+% =========================================================
+\section*{Khả năng tái lập và dữ liệu}
+\addcontentsline{toc}{section}{Khả năng tái lập và dữ liệu}
+
+Các dữ liệu gốc được lấy công khai từ Our World in Data. Mã nguồn thực nghiệm nên được lưu kèm notebook Python/Google Colab, danh sách URL dữ liệu, phiên bản thư viện và ngày truy cập dữ liệu. Ngày truy cập được sử dụng trong bản thảo này là 13/09/2026.
+
+% =========================================================
+\begin{thebibliography}{99}
+% =========================================================
+
+\bibitem{macqueen1967}
+J. B. MacQueen,
+``Some Methods for Classification and Analysis of Multivariate Observations,''
+\textit{Proceedings of the Fifth Berkeley Symposium on Mathematical Statistics and Probability},
+vol. 1, pp. 281--297, 1967.
+
+\bibitem{lloyd1982}
+S. P. Lloyd,
+``Least Squares Quantization in PCM,''
+\textit{IEEE Transactions on Information Theory},
+vol. 28, no. 2, pp. 129--137, 1982.
+
+\bibitem{rousseeuw1987}
+P. J. Rousseeuw,
+``Silhouettes: A graphical aid to the interpretation and validation of cluster analysis,''
+\textit{Journal of Computational and Applied Mathematics},
+vol. 20, pp. 53--65, 1987.
+
+\bibitem{pearson1901}
+K. Pearson,
+``On Lines and Planes of Closest Fit to Systems of Points in Space,''
+\textit{Philosophical Magazine},
+vol. 2, no. 11, pp. 559--572, 1901.
+
+\bibitem{owid_gdp}
+Our World in Data,
+``GDP per capita -- World Bank -- In constant international-\$,''
+\url{https://ourworldindata.org/grapher/gdp-per-capita-worldbank},
+accessed Sep. 13, 2026.
+
+\bibitem{owid_life}
+Our World in Data,
+``Life expectancy,''
+\url{https://ourworldindata.org/grapher/life-expectancy},
+accessed Sep. 13, 2026.
+
+\bibitem{owid_schooling}
+Our World in Data,
+``Average years of schooling,''
+\url{https://ourworldindata.org/grapher/years-of-schooling},
+accessed Sep. 13, 2026.
+
+\bibitem{owid_internet}
+Our World in Data,
+``Share of individuals using the Internet,''
+\url{https://ourworldindata.org/grapher/share-of-individuals-using-the-internet},
+accessed Sep. 13, 2026.
+
+\bibitem{owid_electricity}
+Our World in Data,
+``Share of the population with access to electricity,''
+\url{https://ourworldindata.org/grapher/share-of-the-population-with-access-to-electricity},
+accessed Sep. 13, 2026.
+
+\bibitem{owid_hdi}
+Our World in Data,
+``Human Development Index,''
+\url{https://ourworldindata.org/grapher/human-development-index},
+accessed Sep. 13, 2026.
+
+\end{thebibliography}
+
+\end{document}

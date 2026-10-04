@@ -1,0 +1,12 @@
+feature,vif
+log_electricity_demand,3.510694621579338
+log_population,2.600782617837334
+gas_share_elec,1.7022195719331228
+coal_share_elec,1.616195908387928
+hydro_share_elec,1.5463792480118417
+nuclear_share_elec,1.327918747049255
+year_centered,1.1487964887066517
+wind_share_elec,1.1459842215039386
+solar_share_elec,1.139150739115816
+net_elec_imports_share_demand,1.0821883249948887
+biofuel_share_elec,1.0551288520097666

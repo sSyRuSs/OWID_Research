@@ -1,0 +1,14 @@
+{
+  "rows_before_feature_rule": 5690,
+  "rows_after_feature_rule": 5281,
+  "excluded_for_sparse_features": 409,
+  "countries": 212,
+  "year_min": 2000,
+  "year_max": 2025,
+  "duplicate_country_year": 0,
+  "split_rows": {
+    "train": 3944,
+    "validation": 632,
+    "test": 705
+  }
+}

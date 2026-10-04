@@ -1,0 +1,34 @@
+{
+  "rows_before_sparse_rule": 5387,
+  "rows_after_sparse_rule": 5267,
+  "rows_excluded_sparse": 120,
+  "countries": 210,
+  "regions": 5,
+  "year_min": 2000,
+  "year_max": 2025,
+  "target_outliers_iqr": 25,
+  "target_outlier_lower": -285.27250000000015,
+  "target_outlier_upper": 1215.9475000000002,
+  "invalid_share_counts": {
+    "coal_share_elec": 0,
+    "gas_share_elec": 0,
+    "oil_share_elec": 0,
+    "solar_share_elec": 0,
+    "wind_share_elec": 0,
+    "hydro_share_elec": 0,
+    "nuclear_share_elec": 0,
+    "biofuel_share_elec": 0,
+    "other_renewables_share_elec": 0,
+    "renewables_share_elec": 14
+  },
+  "temporal_rows": {
+    "train": 3943,
+    "test": 697,
+    "validation": 627
+  },
+  "unseen_country_counts": {
+    "test": 42,
+    "train": 126,
+    "validation": 42
+  }
+}

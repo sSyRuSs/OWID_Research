@@ -1,0 +1,9 @@
+K-MEANS OWID — KẾT QUẢ THỰC NGHIỆM
+Năm: 2023
+Số quan sát dùng cho K-Means: 176
+K được chọn: 2
+Silhouette Score: 0.5381
+PC1: 78.11%
+PC2: 11.26%
+PC1 + PC2: 89.37%
+Cluster của Việt Nam: 0

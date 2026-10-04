@@ -1,0 +1,7 @@
+split,model,n,mae,rmse,r2,parameters
+Validation (2019-2021),Linear Regression,632,43.600219976601586,81.82767492744571,0.887368607538292,{}
+Validation (2019-2021),Random Forest,632,29.974342025316247,48.78228235816384,0.959970214569671,"{""max_depth"": null, ""max_features"": 0.8, ""min_samples_leaf"": 1, ""n_estimators"": 500}"
+Validation (2019-2021),XGBoost,632,25.815058632228947,48.244675256779196,0.9608476525750933,"{""colsample_bytree"": 0.9, ""learning_rate"": 0.03, ""max_depth"": 6, ""min_child_weight"": 2, ""n_estimators"": 700, ""reg_lambda"": 1.0, ""subsample"": 0.9}"
+Test (2022-2025),Linear Regression,705,43.541133307113135,77.83308521024327,0.8976661902633002,{}
+Test (2022-2025),Random Forest,705,29.768984992907942,47.14118319338464,0.9624602299111067,"{""max_depth"": null, ""max_features"": 0.8, ""min_samples_leaf"": 1, ""n_estimators"": 500}"
+Test (2022-2025),XGBoost,705,24.2476838174103,41.02615306120217,0.9715676836194501,"{""colsample_bytree"": 0.9, ""learning_rate"": 0.03, ""max_depth"": 6, ""min_child_weight"": 2, ""n_estimators"": 700, ""reg_lambda"": 1.0, ""subsample"": 0.9}"

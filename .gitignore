@@ -1,0 +1,20 @@
+.venv/
+.tmp/
+tmp/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+
+# Fitted estimators are reproducible but large (~1 GB); regenerate them.
+outputs/**/models/
+*.joblib
+
+# LaTeX intermediates; keep source and final PDF.
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz

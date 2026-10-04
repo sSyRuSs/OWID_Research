@@ -1,0 +1,13 @@
+feature,missing_percent
+coal_share_elec,0.3787161522438932
+gas_share_elec,1.9882597992804392
+oil_share_elec,0.0
+hydro_share_elec,1.439121378526794
+nuclear_share_elec,1.7231584927097139
+wind_share_elec,2.7078204885438364
+solar_share_elec,0.0946790380609733
+biofuel_share_elec,0.05680742283658398
+other_renewables_share_elec,0.05680742283658398
+net_elec_imports_share_demand,0.0
+log_per_capita_electricity,0.0
+year,0.0
