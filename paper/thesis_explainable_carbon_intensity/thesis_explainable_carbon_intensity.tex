@@ -9,8 +9,8 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!55!black}
-\graphicspath{{../outputs/thesis/figures/}}
-\input{../outputs/thesis/tables/results_macros.tex}
+\graphicspath{{../../outputs/thesis/figures/}}
+\input{../../outputs/thesis/tables/results_macros.tex}
 \onehalfspacing
 \setlength{\emergencystretch}{3em}
 \pagestyle{plain}
@@ -117,7 +117,7 @@ Khoảng tin cậy 95\% của mô hình chính được bootstrap theo cụm qu�
 CatBoost được chọn bằng validation và đạt MAE \TemporalMAE{}, RMSE \TemporalRMSE{}, $R^2=\TemporalRsquared$ trên temporal test. Khoảng tin cậy bootstrap theo cụm quốc gia của RMSE là 27,64--44,87. Các mô hình tuyến tính có RMSE khoảng 82,5, cho thấy tương tác và phi tuyến mang thông tin đáng kể. Tuy nhiên, unseen-country khó hơn rõ rệt: CatBoost đạt MAE \UnseenMAE{}, RMSE \UnseenRMSE{} và $R^2=\UnseenRsquared$.
 
 \small
-\input{../outputs/thesis/tables/model_metrics.tex}
+\input{../../outputs/thesis/tables/model_metrics.tex}
 \normalsize
 
 \section{Chuyển giao vùng}
@@ -177,7 +177,7 @@ Các kịch bản bắt đầu từ hàng Việt Nam năm 2025 và chỉ thay đ
 Kịch bản giảm 10 điểm phần trăm than và tăng đồng thời 5 điểm mặt trời, 5 điểm gió cho mức giảm dự báo lớn nhất, \BestScenarioDelta{} gCO$_2$e/kWh. Kịch bản giảm 5 điểm thủy điện và tăng 5 điểm khí làm dự báo tăng 36,84 gCO$_2$e/kWh. Đây là so sánh ceteris paribus, chưa xét ràng buộc lưới, lưu trữ, chi phí, độ tin cậy hay diễn biến nhu cầu.
 
 \small
-\input{../outputs/thesis/tables/vietnam_scenarios.tex}
+\input{../../outputs/thesis/tables/vietnam_scenarios.tex}
 \normalsize
 
 \chapter{Thảo luận}
@@ -212,11 +212,11 @@ Luận văn đã xây dựng một workflow end-to-end, tái lập và có khả
 \appendix
 \chapter{Bảng kết quả bổ sung}
 \section{Khoảng tin cậy bootstrap}
-\input{../outputs/thesis/tables/bootstrap_ci.tex}
+\input{../../outputs/thesis/tables/bootstrap_ci.tex}
 
 \section{Kết quả region-transfer đầy đủ}
 \small
-\input{../outputs/thesis/tables/region_transfer_metrics.tex}
+\input{../../outputs/thesis/tables/region_transfer_metrics.tex}
 \normalsize
 
 \chapter{Tái lập nghiên cứu}

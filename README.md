@@ -48,8 +48,10 @@ outputs/thesis/
 outputs/kmeans/
   kmeans_owid_outputs.zip      # archive kết quả demo K-Means
 paper/
-  thesis_explainable_carbon_intensity.tex
-  thesis_explainable_carbon_intensity.pdf
+  kmeans_owid_development/             # Bài phân cụm K-Means
+  carbon_intensity_ml_owid_2000_2025/  # Bài ML carbon intensity phiên bản cũ
+  thesis_explainable_carbon_intensity/ # Luận văn explainable carbon intensity
+  explainable_carbon_intensity_owid_2000_2025/ # Paper nghiên cứu mới nhất
 requirements.txt
 run_all.ps1
 run_all.sh
@@ -59,6 +61,8 @@ Code thực thi được giữ trong `src/`, script tiện ích/entrypoint trong
 nghiên cứu trong `notebooks/`, dữ liệu nguồn và panel trong `data/`, và kết quả
 sinh tự động trong `outputs/`. Các notebook và artifact K-Means được giữ nguyên;
 workflow luận văn chính dùng `thesis_workflow.py` và `outputs/thesis/`.
+Mỗi bài viết và PDF được nhóm riêng trong `paper/`; các macro LaTeX tự sinh
+cho bài carbon-intensity cũ được ghi trong thư mục riêng của bài đó.
 
 ## Chạy trên Windows PowerShell
 

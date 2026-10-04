@@ -332,9 +332,9 @@ $K$ & \textbf{WCSS} & \textbf{Silhouette Score} \\
 \end{tabular}
 \end{table}
 
-\SafeFigure{../outputs/elbow_method.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/elbow\_method.png}.}{Đường WCSS theo số lượng cụm $K$}
+\SafeFigure{../../outputs/elbow_method.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/elbow\_method.png}.}{Đường WCSS theo số lượng cụm $K$}
 
-\SafeFigure{../outputs/silhouette_scores.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/silhouette\_scores.png}.}{Silhouette Score theo số lượng cụm $K$}
+\SafeFigure{../../outputs/silhouette_scores.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/silhouette\_scores.png}.}{Silhouette Score theo số lượng cụm $K$}
 
 Theo tiêu chí Silhouette Score cao nhất được cài đặt trong notebook, nghiên cứu lựa chọn:
 
@@ -369,7 +369,7 @@ Cluster 0 có trung bình cao hơn Cluster 1 ở cả năm đặc trưng: GDP/ng
 
 Hai thành phần PCA đầu tiên giải thích lần lượt 78,11\% và 11,26\% phương sai của dữ liệu; tổng cộng là 89,37\%.
 
-\SafeFigure{../outputs/pca_clusters.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/pca\_clusters.png}.}{Trực quan hóa các cụm quốc gia trong không gian PCA hai chiều}
+\SafeFigure{../../outputs/pca_clusters.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/pca\_clusters.png}.}{Trực quan hóa các cụm quốc gia trong không gian PCA hai chiều}
 
 Biểu đồ PCA được sử dụng để quan sát mức độ tách biệt tương đối giữa các cụm. Tuy nhiên, vì PCA chỉ là phép chiếu từ năm chiều xuống hai chiều, khoảng cách trên hình không phản ánh toàn bộ thông tin đã được K-Means sử dụng.
 
@@ -391,7 +391,7 @@ HDI chỉ được ghép vào sau khi quá trình phân cụm hoàn tất. Bản
 \end{tabular}
 \end{table}
 
-\SafeFigure[0.72\linewidth]{../outputs/hdi_by_cluster.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/hdi\_by\_cluster.png}.}{HDI trung bình theo từng cụm}
+\SafeFigure[0.72\linewidth]{../../outputs/hdi_by_cluster.png}{Chạy notebook từ thư mục gốc dự án để sinh tệp \texttt{outputs/hdi\_by\_cluster.png}.}{HDI trung bình theo từng cụm}
 
 HDI trung bình của Cluster 0 cao hơn Cluster 1 là 0,277 điểm; trung vị cũng cao hơn 0,265 điểm. Sự phân tầng cùng chiều này hỗ trợ cách diễn giải rằng cấu trúc do K-Means tìm được có liên quan đến mức độ phát triển con người. Tuy nhiên, đây chỉ là đối chiếu mô tả, không phải bằng chứng nhân quả hoặc thước đo xác nhận tuyệt đối.
 

@@ -20,7 +20,7 @@ if (-not (Test-Path ".venv\Scripts\python.exe")) {
 
 $xelatex = "C:\Users\Admin\AppData\Local\Programs\MiKTeX\miktex\bin\x64\xelatex.exe"
 if (Test-Path $xelatex) {
-    Push-Location .\paper
+    Push-Location .\paper\thesis_explainable_carbon_intensity
     try {
         & $xelatex -interaction=nonstopmode -halt-on-error thesis_explainable_carbon_intensity.tex
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

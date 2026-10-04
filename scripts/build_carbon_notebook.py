@@ -178,7 +178,8 @@ display(pd.read_csv(wf.TABLE_DIR / "xgboost_permutation_importance.csv").head(12
 ## 7. Artifact và khả năng tái lập
 
 Kết quả máy đọc nằm trong `outputs/carbon_intensity/`; mô hình đã fit nằm trong
-`models/`; các bảng LaTeX và macro được sinh tự động trong `paper/`. Paper không
+`models/`; các bảng LaTeX và macro được sinh tự động trong
+`paper/carbon_intensity_ml_owid_2000_2025/`. Paper không
 chép tay metric mà dùng `\\input{generated_results.tex}` và bảng tự sinh.
 
 Giới hạn chính: năm 2025 chỉ phủ một phần quốc gia; các biến cùng năm phù hợp với

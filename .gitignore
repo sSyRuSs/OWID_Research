@@ -18,3 +18,8 @@ outputs/**/models/
 *.lof
 *.lot
 *.synctex.gz
+*.blg
+*.bbl
+*.xdv
+*.fls
+*.fdb_latexmk

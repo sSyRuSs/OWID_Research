@@ -2,12 +2,12 @@ protocol,split,model,model_label,n,selected_parameters,mae,rmse,r2
 temporal,test,linear_regression,Linear Regression,697,{},49.74579721315311,82.7810908524054,0.8869560604450673
 temporal,test,ridge,Ridge,697,"{""alpha"": 0.01}",49.74566058346413,82.7810534346523,0.8869561626386774
 temporal,test,elastic_net,Elastic Net,697,"{""alpha"": 0.001, ""l1_ratio"": 0.7}",49.72579654787038,82.77548264203973,0.8869713768104832
-temporal,test,random_forest,Random Forest,697,"{""max_depth"": null, ""max_features"": 0.8, ""min_samples_leaf"": 1, ""n_estimators"": 450}",30.70092319464382,49.05226727871537,0.9603079832375461
+temporal,test,random_forest,Random Forest,697,"{""max_depth"": null, ""max_features"": 0.8, ""min_samples_leaf"": 1, ""n_estimators"": 450}",30.70092319464382,49.05226727871536,0.9603079832375461
 temporal,test,xgboost,XGBoost,697,"{""colsample_bytree"": 0.9, ""learning_rate"": 0.05, ""max_depth"": 6, ""min_child_weight"": 2, ""n_estimators"": 700, ""reg_lambda"": 1.0, ""subsample"": 0.9}",27.716542213308585,47.69115688612941,0.9624801831854806
 temporal,test,catboost,CatBoost,697,"{""depth"": 6, ""iterations"": 800, ""learning_rate"": 0.05}",24.675367601485547,41.04068839359848,0.9722147526295172
 unseen_country,test,linear_regression,Linear Regression,1047,{},61.05709747846263,100.59299763816968,0.7920548052085273
 unseen_country,test,ridge,Ridge,1047,"{""alpha"": 10.0}",60.81816956802358,100.52561608741297,0.7923332933183247
 unseen_country,test,elastic_net,Elastic Net,1047,"{""alpha"": 0.01, ""l1_ratio"": 0.2}",60.266232048436436,100.37700540900346,0.7929468419744987
-unseen_country,test,random_forest,Random Forest,1047,"{""max_depth"": null, ""max_features"": 0.8, ""min_samples_leaf"": 1, ""n_estimators"": 450}",65.32129981959038,115.5547986219573,0.7255966817123582
+unseen_country,test,random_forest,Random Forest,1047,"{""max_depth"": null, ""max_features"": 0.8, ""min_samples_leaf"": 1, ""n_estimators"": 450}",65.32129981959038,115.55479862195732,0.7255966817123581
 unseen_country,test,xgboost,XGBoost,1047,"{""colsample_bytree"": 0.9, ""learning_rate"": 0.05, ""max_depth"": 3, ""min_child_weight"": 2, ""n_estimators"": 700, ""reg_lambda"": 1.0, ""subsample"": 0.9}",59.48525252817965,107.06745342182393,0.7644254690078611
 unseen_country,test,catboost,CatBoost,1047,"{""depth"": 6, ""iterations"": 800, ""learning_rate"": 0.05}",60.697741068923165,110.60811603060213,0.7485872033687453

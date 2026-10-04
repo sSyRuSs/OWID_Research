@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-10-04T04:52:25.791524+00:00",
+  "created_utc": "2026-10-04T12:41:48.398057+00:00",
   "source_urls": {
     "electricity_by_source": "https://ourworldindata.org/grapher/electricity-mix.csv?v=1&csvType=full&useColumnShortNames=false&source=total&metric=by_source&frequency=annual",
     "electricity_generation": "https://ourworldindata.org/grapher/electricity-mix.csv?v=1&csvType=full&useColumnShortNames=false&source=total&metric=generation&frequency=annual",
@@ -15,52 +15,52 @@
     "owid-grapher-electricity-inputs.csv": {
       "bytes": 1482608,
       "sha256": "c6b53227aface90509366633068d308be26bc8a2c855a6f8323f5b598200a314",
-      "modified_utc": "2026-10-04T04:52:25.705173+00:00"
+      "modified_utc": "2026-10-04T12:41:48.351766+00:00"
     },
     "owid-grapher-electricity-by-source.csv": {
       "bytes": 544028,
       "sha256": "3c1b33823486dfcb8f661ec3f64bb64a741ff460620f0efbb55545ed34fea97f",
-      "modified_utc": "2026-10-04T04:52:22.358233+00:00"
+      "modified_utc": "2026-10-04T12:41:38.420309+00:00"
     },
     "owid-grapher-electricity-generation.csv": {
       "bytes": 204270,
       "sha256": "d159338a331a2485541ec26820b808da8a9cab4949f5b4fa14b53d9fe329e6de",
-      "modified_utc": "2026-10-04T04:52:22.583417+00:00"
+      "modified_utc": "2026-10-04T12:41:39.394379+00:00"
     },
     "owid-grapher-electricity-demand.csv": {
       "bytes": 161196,
       "sha256": "fc72e7103472d9746cf92ee9025d355c510ef43bb6a56d953f4946062decb840",
-      "modified_utc": "2026-10-04T04:52:22.777455+00:00"
+      "modified_utc": "2026-10-04T12:41:40.893717+00:00"
     },
     "owid-grapher-net-imports.csv": {
       "bytes": 144480,
       "sha256": "d137cb53861644b02d7d4bb29aaa8d8c3676896e4f97b80bcdcb4eae70e9cef4",
-      "modified_utc": "2026-10-04T04:52:22.970363+00:00"
+      "modified_utc": "2026-10-04T12:41:42.289996+00:00"
     },
     "owid-grapher-electricity-per-capita.csv": {
       "bytes": 209591,
       "sha256": "a77084ab6dbb1a42a6b0a3fb26240c8c03fdf2ce6047663c116a2aa1a61c2a97",
-      "modified_utc": "2026-10-04T04:52:23.190118+00:00"
+      "modified_utc": "2026-10-04T12:41:43.311494+00:00"
     },
     "owid-grapher-population.csv": {
       "bytes": 1594182,
       "sha256": "6e72d4ffe8f0e940df60c90b13c8ad6eda85043b995b244e8b3e20b1e833b541",
-      "modified_utc": "2026-10-04T04:52:23.608827+00:00"
+      "modified_utc": "2026-10-04T12:41:44.573988+00:00"
     },
     "owid-grapher-gdp-per-capita.csv": {
       "bytes": 276698,
       "sha256": "18018aea4360d625b274c8a773ebd7a54b7e22e1d79e19587d5af4f0eedac111",
-      "modified_utc": "2026-10-04T04:52:23.851173+00:00"
+      "modified_utc": "2026-10-04T12:41:45.341729+00:00"
     },
     "owid-grapher-carbon-intensity.csv": {
       "bytes": 166063,
       "sha256": "96f8a3dfd845f0cfea6bdd16274fe7a97b790c20237ad788bbdfda5ab08aece9",
-      "modified_utc": "2026-10-04T04:52:24.047676+00:00"
+      "modified_utc": "2026-10-04T12:41:46.275957+00:00"
     },
     "owid-grapher-carbon-intensity.metadata.json": {
       "bytes": 1747,
       "sha256": "650cbea8ef750ea6114da58ae6f2c9b110f548bf521ba1c198dfdfd039f85c1c",
-      "modified_utc": "2026-10-04T04:52:25.194101+00:00"
+      "modified_utc": "2026-10-04T12:41:47.979015+00:00"
     }
   },
   "energy_shape": [

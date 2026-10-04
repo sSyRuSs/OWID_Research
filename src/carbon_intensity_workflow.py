@@ -46,7 +46,7 @@ OUTPUT_DIR = ROOT / "outputs" / "carbon_intensity"
 FIGURE_DIR = OUTPUT_DIR / "figures"
 TABLE_DIR = OUTPUT_DIR / "tables"
 MODEL_DIR = OUTPUT_DIR / "models"
-PAPER_DIR = ROOT / "paper"
+PAPER_DIR = ROOT / "paper" / "carbon_intensity_ml_owid_2000_2025"
 
 ENERGY_PATH = RAW_DIR / "owid-grapher-electricity-inputs.csv"
 TARGET_PATH = RAW_DIR / "owid-grapher-carbon-intensity.csv"
