@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-04T12:42:59.215651+00:00",
+  "generated_at_utc": "2026-10-10T09:47:52.982770+00:00",
   "python": "3.13.15 (tags/v3.13.15:4061bc4, Aug  5 2026, 13:05:39) [MSC v.1944 64 bit (AMD64)]",
   "platform": "Windows-11-10.0.26200-SP0",
   "packages": {
@@ -31,7 +31,7 @@
     "data\\raw\\owid-grapher-population.csv": "6e72d4ffe8f0e940df60c90b13c8ad6eda85043b995b244e8b3e20b1e833b541",
     "data\\raw\\owid-grapher-gdp-per-capita.csv": "18018aea4360d625b274c8a773ebd7a54b7e22e1d79e19587d5af4f0eedac111",
     "data\\raw\\owid-grapher-carbon-intensity.csv": "96f8a3dfd845f0cfea6bdd16274fe7a97b790c20237ad788bbdfda5ab08aece9",
-    "data\\raw\\owid-grapher-carbon-intensity.metadata.json": "650cbea8ef750ea6114da58ae6f2c9b110f548bf521ba1c198dfdfd039f85c1c"
+    "data\\raw\\owid-grapher-carbon-intensity.metadata.json": "5d2231c8a84ffc43d9347b14712a222e573f87e152b5c06090a5005c6bdf6bd8"
   },
   "model_features": [
     "coal_share_elec",
