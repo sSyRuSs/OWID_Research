@@ -88,10 +88,19 @@ chạy notebook.
 
 ## Google Colab
 
-Upload/clone cả repository, chạy `pip install -r requirements.txt`, mở notebook
-và chọn kernel đã cài các dependency đó, rồi **Run all**. Notebook tự tải CSV
-trực tiếp từ OWID Grapher API khi chạy. Các file raw và SHA-256 được lưu lại để
-ghi nhận chính xác dữ liệu đã dùng; lần chạy sau sẽ lấy dữ liệu mới nhất.
+1. Tải cả repository lên Google Drive và đặt thư mục ở
+   `MyDrive/kmeans-owid-country-development` (thư mục này phải chứa
+   `requirements.txt`, `src/` và `notebooks/`).
+2. Mở `notebooks/Explainable_Carbon_Intensity_Thesis.ipynb` bằng Google Colab
+   và chọn **Runtime → Run all**.
+3. Ở lần chạy đầu, chấp thuận yêu cầu mount Google Drive. Cell setup đầu tiên
+   tự đọc `requirements.txt` từ thư mục dự án và cài các dependency; không cần
+   chạy lệnh cài đặt riêng.
+
+Nếu đặt thư mục dự án ở vị trí khác trong Drive, cập nhật biến `ROOT` trong
+cell setup đầu tiên của notebook cho khớp. Notebook tải CSV trực tiếp từ OWID
+Grapher API khi chạy. Các file raw và SHA-256 được lưu lại để ghi nhận chính
+xác dữ liệu đã dùng; lần chạy sau sẽ lấy dữ liệu mới nhất.
 
 ## Kiểm tra bằng chứng
 
